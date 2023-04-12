@@ -20,10 +20,6 @@ class Storage {
       return;
     }
     if (Platform.isWindows) {
-      if (kDebugMode) {
-        _directory = Directory('.\\~hoard');
-        return;
-      }
       _directory = Directory('${Platform.environment['USERPROFILE']}\\Hoard');
       return;
     }
