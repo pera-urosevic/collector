@@ -13,6 +13,20 @@ class EditorTags extends StatefulWidget {
 }
 
 class _EditorTagsState extends State<EditorTags> {
+  late TextEditingController _controller;
+
+  @override
+  void initState() {
+    _controller = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     ArtifactProvider providerArtifact = context.watch<ArtifactProvider>();
@@ -22,45 +36,59 @@ class _EditorTagsState extends State<EditorTags> {
       lookup = widget.lookup!.where((l) => !widget.values.contains(l)).toList();
     }
 
-    return Row(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Expanded(
-          child: Wrap(
-            spacing: 4,
-            runSpacing: 4,
-            children: widget.values
-                .map(
-                  (value) => Chip(
-                    label: Text(value),
-                    onDeleted: () {
-                      List<dynamic> newValues = widget.values.where((v) => v != value).toList();
-                      providerArtifact.setValue(widget.fieldId, newValues);
-                    },
-                  ),
-                )
-                .toList(),
-          ),
+        Wrap(
+          direction: Axis.horizontal,
+          spacing: 4,
+          runSpacing: 4,
+          children: widget.values
+              .map(
+                (value) => Chip(
+                  label: Text(value),
+                  onDeleted: () {
+                    List<dynamic> newValues = widget.values.where((v) => v != value).toList();
+                    providerArtifact.setValue(widget.fieldId, newValues);
+                  },
+                ),
+              )
+              .toList(),
         ),
-        lookup.isEmpty
-            ? Container()
-            : PopupMenuButton<String>(
-                icon: const Icon(Icons.arrow_drop_down),
-                padding: const EdgeInsets.all(0),
-                onSelected: (String value) {
+        const SizedBox(height: 6),
+        Row(
+          children: [
+            Expanded(
+              child: TextField(
+                controller: _controller,
+                onSubmitted: (value) {
                   List<dynamic> newValues = List.from(widget.values)..add(value);
                   providerArtifact.setValue(widget.fieldId, newValues);
                 },
-                itemBuilder: (BuildContext context) {
-                  return lookup
-                      .map(
-                        (l) => PopupMenuItem<String>(
-                          value: l,
-                          child: Text(l),
-                        ),
-                      )
-                      .toList();
-                },
-              )
+              ),
+            ),
+            lookup.isEmpty
+                ? Container()
+                : PopupMenuButton<String>(
+                    icon: const Icon(Icons.arrow_drop_down),
+                    padding: const EdgeInsets.all(0),
+                    onSelected: (String value) {
+                      List<dynamic> newValues = List.from(widget.values)..add(value);
+                      providerArtifact.setValue(widget.fieldId, newValues);
+                    },
+                    itemBuilder: (BuildContext context) {
+                      return lookup
+                          .map(
+                            (l) => PopupMenuItem<String>(
+                              value: l,
+                              child: Text(l),
+                            ),
+                          )
+                          .toList();
+                    },
+                  )
+          ],
+        ),
       ],
     );
   }

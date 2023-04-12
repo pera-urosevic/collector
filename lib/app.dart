@@ -26,12 +26,12 @@ class _AppState extends State<App> {
     await providerPile.loadPile(initialPage);
     setState(() => home = const Pile());
 
-    return;
-    // ignore: dead_code
     if (!mounted) return;
     ArtifactProvider providerArtifact = context.read<ArtifactProvider>();
     providerArtifact.load(providerPile, providerPile.artifacts[1]);
     setState(() => home = const Artifact());
+    return;
+    // ignore: dead_code
   }
 
   @override
