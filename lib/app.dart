@@ -8,8 +8,6 @@ import 'package:hoard/theme.dart';
 import 'package:hoard/widgets/pile.dart';
 import 'package:provider/provider.dart';
 
-// TODO! tests
-
 class App extends StatefulWidget {
   const App({super.key});
 
