@@ -74,8 +74,8 @@ class PileProvider with ChangeNotifier {
     }
     if (_pile.filter.query.isNotEmpty) {
       temp = temp.where((artifact) {
-        for (MapEntry<String, RegExp> entry in reQueries.entries) {
-          if (entry.value.hasMatch(artifact[entry.key])) return true;
+        for (MapEntry<String, RegExp> re in reQueries.entries) {
+          if (re.value.hasMatch(artifact[re.key].toString())) return true;
         }
         return false;
       }).toList();
