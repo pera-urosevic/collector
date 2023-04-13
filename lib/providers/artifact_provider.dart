@@ -73,7 +73,8 @@ class ArtifactProvider with ChangeNotifier {
           }
           bool isValidUrl = Uri.parse(mdd[field.id]).host.isNotEmpty;
           if (!isValidUrl) {
-            String imagePath = [storage.directory.path, mdd[field.id]].join(Platform.pathSeparator);
+            String localPath = mdd[field.id].replaceFirst(':', Platform.pathSeparator);
+            String imagePath = [storage.directory.path, localPath].join(Platform.pathSeparator);
             Uri uri = Uri.file(absolute(imagePath), windows: Platform.isWindows);
             mdd[field.id] = uri.toString();
           }
