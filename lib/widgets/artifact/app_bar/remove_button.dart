@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hoard/providers/artifact_provider.dart';
 import 'package:hoard/providers/pile_provider.dart';
-import 'package:hoard/services/ui.dart';
+import 'package:hoard/services/ui_service.dart';
 import 'package:provider/provider.dart';
 
 class RemoveButton extends StatefulWidget {

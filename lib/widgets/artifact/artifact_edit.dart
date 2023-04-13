@@ -13,7 +13,7 @@ import 'package:hoard/widgets/artifact/editor/editor_tags.dart';
 import 'package:hoard/widgets/artifact/editor/editor_image.dart';
 import 'package:hoard/providers/artifact_provider.dart';
 import 'package:hoard/providers/pile_provider.dart';
-import 'package:hoard/services/data.dart';
+import 'package:hoard/services/data_service.dart';
 import 'package:provider/provider.dart';
 
 Widget fieldEditor(dynamic value, FieldModel field, Map<String, List<String>> lookups, String pileId) {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hoard/services/data.dart';
+import 'package:hoard/services/data_service.dart';
 import 'package:hoard/widgets/artifact.dart';
 import 'package:hoard/widgets/pile/pile_bottom_bar.dart';
 import 'package:hoard/providers/artifact_provider.dart';

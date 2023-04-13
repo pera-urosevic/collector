@@ -30,7 +30,6 @@ class Storage {
     await for (FileSystemEntity entity in _directory.list(recursive: false)) {
       if (extension(entity.path) != '.json') continue;
       String name = basenameWithoutExtension(entity.path);
-      if (name == '_') continue;
       pileIds.add(name);
     }
     pileIds.sort();
