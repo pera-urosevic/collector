@@ -28,4 +28,9 @@ class HoardProvider with ChangeNotifier {
     await storage.save(pile);
     loadHoard();
   }
+
+  removePile(String pileId) async {
+    await storage.remove(pileId);
+    await loadHoard();
+  }
 }

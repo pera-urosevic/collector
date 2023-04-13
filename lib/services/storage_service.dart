@@ -49,6 +49,11 @@ class Storage {
     return pile;
   }
 
+  Future<void> remove(String pileId) async {
+    String filePath = '${_directory.path}${Platform.pathSeparator}$pileId.json';
+    File(filePath).delete();
+  }
+
   Future<String> addImage(String pileId, String url) async {
     var response = await get(Uri.parse(url));
     Image? image = decodeImage(response.bodyBytes);

@@ -19,6 +19,8 @@ class _AppState extends State<App> {
   late Widget home = const Hoard();
 
   initDebug() async {
+    return;
+    // ignore: dead_code
     String initialPage = 'Test';
     PileProvider providerPile = context.read<PileProvider>();
     await providerPile.loadPile(initialPage);
@@ -28,8 +30,6 @@ class _AppState extends State<App> {
     ArtifactProvider providerArtifact = context.read<ArtifactProvider>();
     providerArtifact.load(providerPile, providerPile.artifacts[1]);
     setState(() => home = const Artifact());
-    return;
-    // ignore: dead_code
   }
 
   @override
