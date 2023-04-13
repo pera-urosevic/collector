@@ -34,7 +34,11 @@ class ArtifactView extends StatelessWidget {
       selectable: true,
       onTapLink: (text, href, title) async {
         String url = href.toString();
-        await canLaunchUrlString(url) ? await launchUrlString(url) : debugPrint('Could not launch $href');
+        if (await canLaunchUrlString(url)) {
+          await launchUrlString(url, mode: LaunchMode.platformDefault);
+        } else {
+          debugPrint('Could not launch $href');
+        }
       },
     );
   }
