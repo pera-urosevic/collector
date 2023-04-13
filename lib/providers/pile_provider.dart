@@ -42,6 +42,7 @@ class PileProvider with ChangeNotifier {
             set.add(value);
           }
           _lookups[field.id] = set.toList();
+          _lookups[field.id]?.sort((a, b) => a.compareTo(b));
           break;
         case FieldType.tags:
           Set<String> set = {};
@@ -50,6 +51,7 @@ class PileProvider with ChangeNotifier {
             set.addAll(values);
           }
           _lookups[field.id] = set.toList();
+          _lookups[field.id]?.sort((a, b) => a.compareTo(b));
           break;
         default:
           break;
