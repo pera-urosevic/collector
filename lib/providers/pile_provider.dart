@@ -165,6 +165,7 @@ class PileProvider with ChangeNotifier {
 
   Future<void> loadPile(String pileId) async {
     _pile = await storage.load(pileId);
+    _search = '';
     _cacheFields();
     _cacheLookups();
     _cacheArtifacts();
