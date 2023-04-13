@@ -25,7 +25,7 @@ class PileModel {
   factory PileModel.blank(String pileId) {
     return PileModel(
       id: pileId,
-      template: '# {{ id }}\n\n{{{ data.content }}}\n',
+      template: '# {{ id }}\n\n{{{ content }}}\n',
       fields: [
         FieldModel(id: 'id', defaultValue: '', type: FieldType.id, index: true, search: true),
         FieldModel(id: 'content', defaultValue: '', type: FieldType.text, index: false, search: true),
