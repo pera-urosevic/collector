@@ -85,7 +85,7 @@ class ForgeWorkerRAWG extends ForgeWorker {
 
     // Rating
     try {
-      forging['rating'] = result['metacritic'];
+      forging['rating'] = result['metacritic'].toString();
     } catch (e) {
       // ignore: avoid_print
       print("result['aggregated_rating'] ${result['aggregated_rating']}");

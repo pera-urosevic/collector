@@ -122,7 +122,7 @@ class ForgeWorkerIGDB extends ForgeWorker {
 
     // Rating
     try {
-      forging['rating'] = result['aggregated_rating'].round();
+      forging['rating'] = result['aggregated_rating'].round().toString();
     } catch (e) {
       // ignore: avoid_print
       print("result['aggregated_rating'] ${result['aggregated_rating']}");
