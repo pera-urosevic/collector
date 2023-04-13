@@ -99,7 +99,7 @@ class ForgeWorkerRAWG extends ForgeWorker {
       print("result['summary'] ${result['summary']}");
     }
 
-    // Scribe
+    // Forge
     forging['forge'] = 'RAWG $version ${DateTime.now().toIso8601String()}';
 
     return forging;

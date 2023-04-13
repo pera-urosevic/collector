@@ -136,8 +136,8 @@ class ForgeWorkerIGDB extends ForgeWorker {
       print("result['summary'] ${result['summary']}");
     }
 
-    // Scribe
-    forging['scribe'] = 'IGDB $version ${DateTime.now().toIso8601String()}';
+    // Forge
+    forging['forge'] = 'IGDB $version ${DateTime.now().toIso8601String()}';
 
     return forging;
   }
