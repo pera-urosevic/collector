@@ -68,7 +68,12 @@ class _PileBottomBarState extends State<PileBottomBar> {
                 fontSize: 14,
               ),
               focusNode: _searchFocus,
-              decoration: const InputDecoration.collapsed(hintText: 'Search'),
+              decoration: const InputDecoration(
+                hintText: 'Search',
+                fillColor: Colors.transparent,
+                hoverColor: Colors.transparent,
+                contentPadding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 4.0),
+              ),
               onSubmitted: (value) {
                 widget.providerPile.search = value;
                 _searchFocus.requestFocus();
