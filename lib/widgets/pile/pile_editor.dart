@@ -105,15 +105,15 @@ class _PileEditorState extends State<PileEditor> {
             initialValue: providerPile.filter.id,
             icon: const Icon(Icons.arrow_drop_down),
             padding: const EdgeInsets.all(0),
-            onSelected: (String newSection) {
-              updateEditor(_codeController, newSection, providerPile);
-              setState(() => section = newSection);
-            },
             itemBuilder: (BuildContext context) => sections
                 .map(
                   (section) => PopupMenuItem<String>(
                     value: section,
                     child: Text(titleCase(section)),
+                    onTap: () {
+                      updateEditor(_codeController, section, providerPile);
+                      setState(() => section = section);
+                    },
                   ),
                 )
                 .toList(),

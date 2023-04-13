@@ -49,14 +49,14 @@ class _PileBottomBarState extends State<PileBottomBar> {
             initialValue: widget.providerPile.filter.id,
             icon: const Icon(Icons.arrow_drop_down),
             padding: const EdgeInsets.all(0),
-            onSelected: (String filterId) {
-              widget.providerPile.filter = widget.providerPile.filters.firstWhere((filter) => filter.id == filterId);
-            },
             itemBuilder: (BuildContext context) => widget.providerPile.filters
                 .map(
                   (filter) => PopupMenuItem<String>(
                     value: filter.id,
                     child: Text(filter.id),
+                    onTap: () {
+                      widget.providerPile.filter = filter;
+                    },
                   ),
                 )
                 .toList(),

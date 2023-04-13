@@ -50,18 +50,17 @@ class _EditorSelectState extends State<EditorSelect> {
           initialValue: widget.value,
           icon: const Icon(Icons.arrow_drop_down),
           padding: const EdgeInsets.all(0),
-          onSelected: (String newValue) {
-            _controller.text = newValue;
-            providerArtifact.setValue(widget.fieldId, newValue);
-          },
           itemBuilder: (BuildContext context) {
             if (widget.lookup == null) return const [];
             return widget.lookup!
                 .map(
                   (l) => PopupMenuItem<String>(
-                    value: l,
-                    child: Text(l),
-                  ),
+                      value: l,
+                      child: Text(l),
+                      onTap: () {
+                        _controller.text = l;
+                        providerArtifact.setValue(widget.fieldId, l);
+                      }),
                 )
                 .toList();
           },

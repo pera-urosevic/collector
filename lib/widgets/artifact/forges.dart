@@ -84,9 +84,9 @@ class _ForgesState extends State<Forges> {
           .map((forge) => PopupMenuItem(
                 value: forge,
                 child: Text(forge.id),
+                onTap: () => onForge(forge),
               ))
           .toList(),
-      onSelected: (forge) => onForge(forge),
     );
   }
 }

@@ -72,17 +72,16 @@ class _EditorTagsState extends State<EditorTags> {
                 : PopupMenuButton<String>(
                     icon: const Icon(Icons.arrow_drop_down),
                     padding: const EdgeInsets.all(0),
-                    onSelected: (String value) {
-                      List<dynamic> newValues = List.from(widget.values)..add(value);
-                      providerArtifact.setValue(widget.fieldId, newValues);
-                    },
                     itemBuilder: (BuildContext context) {
                       return lookup
                           .map(
                             (l) => PopupMenuItem<String>(
-                              value: l,
-                              child: Text(l),
-                            ),
+                                value: l,
+                                child: Text(l),
+                                onTap: () {
+                                  List<dynamic> newValues = List.from(widget.values)..add(l);
+                                  providerArtifact.setValue(widget.fieldId, newValues);
+                                }),
                           )
                           .toList();
                     },
