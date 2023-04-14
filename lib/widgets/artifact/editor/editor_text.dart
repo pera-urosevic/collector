@@ -38,8 +38,8 @@ class _EditorTextState extends State<EditorText> {
     }
 
     return TextField(
-      minLines: 6,
-      maxLines: 6,
+      minLines: 4,
+      maxLines: 4,
       controller: _controller,
       onChanged: (value) => providerArtifact.setValue(widget.fieldId, value),
     );

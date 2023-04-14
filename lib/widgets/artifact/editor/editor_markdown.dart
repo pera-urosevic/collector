@@ -50,31 +50,38 @@ class _EditorMarkdownState extends State<EditorMarkdown> {
       );
     }
 
-    return SizedBox(
-      height: 184,
-      child: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: CodeTheme(
-          data: CodeThemeData(styles: atomOneDarkTheme),
-          child: CodeField(
-            cursorColor: themeData.textSelectionTheme.cursorColor,
-            decoration: BoxDecoration(
-              color: themeData.inputDecorationTheme.fillColor,
-            ),
-            padding: const EdgeInsets.all(0),
-            controller: _codeController,
-            onChanged: (newValue) => providerArtifact.setValue(widget.fieldId, newValue),
-            gutterStyle: const GutterStyle(
-              margin: 10,
-              width: 60,
-              showLineNumbers: true,
-              showErrors: true,
-            ),
-            background: themeData.inputDecorationTheme.fillColor,
-            minLines: 10,
-            textStyle: const TextStyle(
-              fontFamily: 'NotoSansMono Mono',
-              fontSize: 16,
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(6),
+      ),
+      clipBehavior: Clip.antiAlias,
+      child: SizedBox(
+        height: 436,
+        child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: CodeTheme(
+            data: CodeThemeData(styles: atomOneDarkTheme),
+            child: CodeField(
+              cursorColor: themeData.textSelectionTheme.cursorColor,
+              decoration: BoxDecoration(
+                color: themeData.inputDecorationTheme.fillColor,
+              ),
+              padding: const EdgeInsets.all(0),
+              controller: _codeController,
+              onChanged: (newValue) => providerArtifact.setValue(widget.fieldId, newValue),
+              gutterStyle: const GutterStyle(
+                margin: 0,
+                width: 0,
+                showLineNumbers: false,
+                showErrors: false,
+                showFoldingHandles: false,
+              ),
+              background: themeData.inputDecorationTheme.fillColor,
+              minLines: 20,
+              textStyle: const TextStyle(
+                fontFamily: 'NotoSansMono Mono',
+                fontSize: 16,
+              ),
             ),
           ),
         ),
