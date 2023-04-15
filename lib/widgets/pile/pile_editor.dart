@@ -69,7 +69,7 @@ class PileEditor extends StatefulWidget {
 }
 
 class _PileEditorState extends State<PileEditor> {
-  String section = sections.first;
+  String _section = sections.first;
   late CodeController _codeController;
 
   @override
@@ -82,7 +82,7 @@ class _PileEditorState extends State<PileEditor> {
         TabModifier(),
       ],
     );
-    updateEditor(_codeController, section, providerPile);
+    updateEditor(_codeController, _section, providerPile);
     super.initState();
   }
 
@@ -99,24 +99,31 @@ class _PileEditorState extends State<PileEditor> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Editing: ${providerPile.id} / ${titleCase(section)}'),
+        title: const Text('Edit'),
         actions: [
-          PopupMenuButton<String>(
-            initialValue: providerPile.filter.id,
-            icon: const Icon(Icons.arrow_drop_down),
-            padding: const EdgeInsets.all(0),
-            itemBuilder: (BuildContext context) => sections
-                .map(
-                  (section) => PopupMenuItem<String>(
-                    value: section,
-                    child: Text(titleCase(section)),
-                    onTap: () {
-                      updateEditor(_codeController, section, providerPile);
-                      setState(() => section = section);
-                    },
-                  ),
-                )
-                .toList(),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(titleCase(_section)),
+              PopupMenuButton<String>(
+                initialValue: providerPile.filter.id,
+                icon: const Icon(Icons.arrow_drop_down),
+                padding: const EdgeInsets.all(0),
+                itemBuilder: (BuildContext context) => sections
+                    .map(
+                      (section) => PopupMenuItem<String>(
+                        value: section,
+                        child: Text(titleCase(section)),
+                        onTap: () {
+                          updateEditor(_codeController, section, providerPile);
+                          setState(() => _section = section);
+                        },
+                      ),
+                    )
+                    .toList(),
+              ),
+              const SizedBox(width: 8),
+            ],
           ),
         ],
       ),
@@ -137,18 +144,18 @@ class _PileEditorState extends State<PileEditor> {
           expands: true,
           background: themeData.inputDecorationTheme.fillColor,
           textStyle: const TextStyle(
-            fontFamily: 'NotoSansMono Mono',
-            fontSize: 16,
+            fontFamily: 'NotoSansMono',
+            fontSize: 14,
           ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.save),
         onPressed: () async {
-          updatePile(providerPile, section, _codeController.text);
+          updatePile(providerPile, _section, _codeController.text);
           await providerPile.savePile();
           if (!mounted) return;
-          displayMessage(context, 'Saved ${titleCase(section)}');
+          displayMessage(context, 'Saved ${titleCase(_section)}');
         },
       ),
     );
