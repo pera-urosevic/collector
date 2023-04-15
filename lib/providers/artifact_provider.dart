@@ -65,18 +65,23 @@ class ArtifactProvider with ChangeNotifier {
   ArtifactModel get markdownData {
     ArtifactModel mdd = Map.from(_artifact);
     for (FieldModel field in _fields) {
+      dynamic value = mdd[field.id];
+      if (value == null) {
+        mdd.remove(field.id);
+        continue;
+      }
       switch (field.type) {
         case FieldType.image:
-          if (mdd[field.id].isEmpty) {
+          if (value.isEmpty) {
             mdd.remove(field.id);
             break;
           }
-          bool isValidUrl = Uri.parse(mdd[field.id]).host.isNotEmpty;
+          bool isValidUrl = Uri.parse(value).host.isNotEmpty;
           if (!isValidUrl) {
-            String localPath = mdd[field.id].replaceFirst(':', Platform.pathSeparator);
+            String localPath = value.replaceFirst(':', Platform.pathSeparator);
             String imagePath = [storage.directory.path, localPath].join(Platform.pathSeparator);
             Uri uri = Uri.file(absolute(imagePath), windows: Platform.isWindows);
-            mdd[field.id] = uri.toString();
+            value = uri.toString();
           }
           break;
         case FieldType.list:
@@ -87,7 +92,7 @@ class ArtifactProvider with ChangeNotifier {
         case FieldType.markdown:
         case FieldType.date:
         case FieldType.datetime:
-          if (mdd[field.id].isEmpty) mdd.remove(field.id);
+          if (value.isEmpty) mdd.remove(field.id);
           break;
         default:
           break;

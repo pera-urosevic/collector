@@ -17,6 +17,7 @@ import 'package:hoard/services/data_service.dart';
 import 'package:provider/provider.dart';
 
 Widget fieldEditor(dynamic value, FieldModel field, Map<String, List<String>> lookups, String pileId) {
+  value ??= field.defaultValue;
   switch (field.type) {
     case FieldType.id:
       return EditorId(fieldId: field.id, value: value);
