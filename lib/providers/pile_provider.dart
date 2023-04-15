@@ -210,7 +210,7 @@ class PileProvider with ChangeNotifier {
         // remove old image
         if (oldArtifactIndex > -1) {
           ArtifactModel oldArtifact = _pile.artifacts[oldArtifactIndex];
-          String oldImage = oldArtifact[fieldId];
+          String oldImage = oldArtifact[fieldId] ?? '';
           if (oldImage != newImage) {
             if (oldImage.isNotEmpty) {
               if (!await storage.removeImage(oldImage)) throw 'Failed to remove old image';

@@ -82,6 +82,7 @@ class ArtifactProvider with ChangeNotifier {
             String imagePath = [storage.directory.path, localPath].join(Platform.pathSeparator);
             Uri uri = Uri.file(absolute(imagePath), windows: Platform.isWindows);
             value = uri.toString();
+            mdd[field.id] = value;
           }
           break;
         case FieldType.list:

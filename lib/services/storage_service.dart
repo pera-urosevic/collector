@@ -64,12 +64,13 @@ class Storage {
       image = copyResize(image, width: 320);
     }
     String key = uuid.v4();
+    String imageField = '$pileId:$key.jpg';
     String imagePath = [pileId, '$key.jpg'].join(Platform.pathSeparator);
     String filePath = [directory.path, imagePath].join(Platform.pathSeparator);
     File file = File(filePath);
     file.createSync(recursive: true);
     file.writeAsBytesSync(encodeJpg(image, quality: 70));
-    return imagePath;
+    return imageField;
   }
 
   Future<bool> removeImage(String imagePath) async {
