@@ -37,7 +37,7 @@ ThemeData themeData = ThemeData(
     contentTextStyle: const TextStyle(
       color: Colors.white,
     ),
-    backgroundColor: Colors.blue.shade600,
+    backgroundColor: Colors.grey.shade900,
   ),
   switchTheme: SwitchThemeData(
     thumbColor: MaterialStateProperty.resolveWith((states) {
