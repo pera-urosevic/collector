@@ -127,25 +127,26 @@ class _PileEditorState extends State<PileEditor> {
           ),
         ],
       ),
-      body: CodeTheme(
-        data: CodeThemeData(styles: atomOneDarkTheme),
-        child: CodeField(
-          controller: _codeController,
-          gutterStyle: GutterStyle(
-            margin: 10,
-            width: 60,
-            showLineNumbers: true,
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: CodeTheme(
+          data: CodeThemeData(styles: atomOneDarkTheme),
+          child: CodeField(
+            controller: _codeController,
+            gutterStyle: const GutterStyle(
+              showLineNumbers: false,
+              showErrors: false,
+              showFoldingHandles: true,
+            ),
+            minLines: null,
+            maxLines: null,
+            wrap: false,
+            expands: false,
             background: themeData.inputDecorationTheme.fillColor,
-            showErrors: true,
-          ),
-          minLines: null,
-          maxLines: null,
-          wrap: false,
-          expands: true,
-          background: themeData.inputDecorationTheme.fillColor,
-          textStyle: const TextStyle(
-            fontFamily: 'NotoSansMono',
-            fontSize: 14,
+            textStyle: const TextStyle(
+              fontFamily: 'NotoSansMono',
+              fontSize: 14,
+            ),
           ),
         ),
       ),
