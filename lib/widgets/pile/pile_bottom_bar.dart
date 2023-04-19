@@ -63,6 +63,7 @@ class _PileBottomBarState extends State<PileBottomBar> {
           ),
           Flexible(
             child: TextField(
+              autofocus: true,
               controller: _searchController,
               style: const TextStyle(
                 fontSize: 14,
