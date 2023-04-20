@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hoard/config.dart';
 import 'package:hoard/providers/pile_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -37,7 +38,8 @@ class _PileBottomBarState extends State<PileBottomBar> {
       selection: _searchSelection,
       text: providerPile.search,
     );
-    _searchFocus.requestFocus();
+
+    if (config.get('mode') == 'wide') _searchFocus.requestFocus();
 
     return Container(
       margin: const EdgeInsets.fromLTRB(8, 4, 70, 4),
