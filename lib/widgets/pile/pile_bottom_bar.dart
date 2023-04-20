@@ -37,6 +37,7 @@ class _PileBottomBarState extends State<PileBottomBar> {
       selection: _searchSelection,
       text: providerPile.search,
     );
+    _searchFocus.requestFocus();
 
     return Container(
       margin: const EdgeInsets.fromLTRB(8, 4, 70, 4),
