@@ -19,7 +19,7 @@ ThemeData themeData = ThemeData(
     color: Colors.grey.shade800.withOpacity(0.7),
   ),
   floatingActionButtonTheme: FloatingActionButtonThemeData(
-    backgroundColor: Colors.blue.shade600,
+    backgroundColor: Colors.indigo.shade600,
     foregroundColor: Colors.white,
   ),
   inputDecorationTheme: InputDecorationTheme(
@@ -41,7 +41,7 @@ ThemeData themeData = ThemeData(
   ),
   switchTheme: SwitchThemeData(
     thumbColor: MaterialStateProperty.resolveWith((states) {
-      if (states.contains(MaterialState.selected)) return Colors.blue.shade400;
+      if (states.contains(MaterialState.selected)) return Colors.indigo.shade400;
       return Colors.grey.shade700;
     }),
     trackColor: MaterialStateProperty.all(Colors.grey.shade800),
@@ -56,8 +56,8 @@ ThemeData themeData = ThemeData(
     ),
   ),
   textSelectionTheme: TextSelectionThemeData(
-    cursorColor: Colors.blue.shade400,
-    selectionColor: Colors.blue.shade400,
-    selectionHandleColor: Colors.blue.shade400,
+    cursorColor: Colors.indigo.shade400,
+    selectionColor: Colors.indigo.shade400,
+    selectionHandleColor: Colors.indigo.shade400,
   ),
 );
