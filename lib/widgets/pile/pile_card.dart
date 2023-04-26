@@ -61,7 +61,6 @@ class PileCard extends StatelessWidget {
                             child: Padding(
                               padding: const EdgeInsets.fromLTRB(0, 2, 0, 2),
                               child: Text(
-                                // TODO! date format
                                 formatIndex(field.type, providerPile.artifacts[index][field.id]),
                                 style: TextStyle(color: Colors.grey.shade500),
                               ),
