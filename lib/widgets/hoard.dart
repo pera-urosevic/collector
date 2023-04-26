@@ -77,7 +77,7 @@ class _HoardState extends State<Hoard> {
               builder: (context) => Prompt(
                 title: 'Create new pile',
                 hint: 'Pile ID',
-                valid: (value) => RegExp('^[a-zA-Z0-9 ]+\$').hasMatch(value),
+                valid: (value) => RegExp('^[a-zA-Z0-9]+\$').hasMatch(value),
               ),
             ),
           );
