@@ -6,6 +6,17 @@ import 'package:hoard/providers/pile_provider.dart';
 import 'package:hoard/providers/artifact_provider.dart';
 import 'package:hoard/services/data_service.dart';
 
+String formatIndex(FieldType type, dynamic value) {
+  switch (type) {
+    case FieldType.date:
+      return formatDate(value);
+    case FieldType.datetime:
+      return formatDatetime(value);
+    default:
+      return value.toString();
+  }
+}
+
 class PileCard extends StatelessWidget {
   final int index;
   const PileCard(this.index, {super.key});
@@ -50,7 +61,8 @@ class PileCard extends StatelessWidget {
                             child: Padding(
                               padding: const EdgeInsets.fromLTRB(0, 2, 0, 2),
                               child: Text(
-                                providerPile.artifacts[index][field.id].toString(),
+                                // TODO! date format
+                                formatIndex(field.type, providerPile.artifacts[index][field.id]),
                                 style: TextStyle(color: Colors.grey.shade500),
                               ),
                             ),
