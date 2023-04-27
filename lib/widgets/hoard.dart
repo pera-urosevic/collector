@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hoard/config.dart';
+import 'package:hoard/services/ui_service.dart';
 import 'package:hoard/widgets/pile.dart';
-import 'package:hoard/widgets/prompt.dart';
 import 'package:hoard/providers/pile_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:hoard/providers/hoard_provider.dart';
@@ -71,16 +71,13 @@ class _HoardState extends State<Hoard> {
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
         onPressed: () async {
-          String newPileId = await Navigator.push(
+          String? newPileId = await dialogString(
             context,
-            MaterialPageRoute(
-              builder: (context) => Prompt(
-                title: 'Create new pile',
-                hint: 'Pile ID',
-                valid: (value) => RegExp('^[a-zA-Z0-9]+\$').hasMatch(value),
-              ),
-            ),
+            'Create a new pile',
+            'Title',
+            (value) => RegExp('^[a-zA-Z0-9]+\$').hasMatch(value),
           );
+          if (newPileId == null) return;
           await providerHoard.createPile(newPileId);
         },
       ),

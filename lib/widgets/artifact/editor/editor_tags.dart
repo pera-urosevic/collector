@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hoard/providers/artifact_provider.dart';
+import 'package:hoard/services/ui_service.dart';
 import 'package:provider/provider.dart';
 
 class EditorTags extends StatefulWidget {
@@ -13,20 +14,6 @@ class EditorTags extends StatefulWidget {
 }
 
 class _EditorTagsState extends State<EditorTags> {
-  late TextEditingController _controller;
-
-  @override
-  void initState() {
-    _controller = TextEditingController();
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     ArtifactProvider providerArtifact = context.watch<ArtifactProvider>();
@@ -36,15 +23,16 @@ class _EditorTagsState extends State<EditorTags> {
       lookup = widget.lookup!.where((l) => !widget.values.contains(l)).toList();
     }
 
-    return Column(
+    return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Wrap(
-          direction: Axis.horizontal,
-          spacing: 4,
-          runSpacing: 4,
-          children: widget.values
-              .map(
+        Expanded(
+          child: Wrap(
+            direction: Axis.horizontal,
+            spacing: 4,
+            runSpacing: 4,
+            children: List.from(
+              widget.values.map(
                 (value) => Chip(
                   label: Text(value),
                   onDeleted: () {
@@ -52,42 +40,39 @@ class _EditorTagsState extends State<EditorTags> {
                     providerArtifact.setValue(widget.fieldId, newValues);
                   },
                 ),
-              )
-              .toList(),
-        ),
-        const SizedBox(height: 6),
-        Row(
-          children: [
-            Expanded(
-              child: TextField(
-                controller: _controller,
-                onSubmitted: (value) {
-                  List<dynamic> newValues = List.from(widget.values)..add(value);
-                  providerArtifact.setValue(widget.fieldId, newValues);
-                },
               ),
             ),
-            lookup.isEmpty
-                ? Container()
-                : PopupMenuButton<String>(
-                    icon: const Icon(Icons.arrow_drop_down),
-                    padding: const EdgeInsets.all(0),
-                    itemBuilder: (BuildContext context) {
-                      return lookup
-                          .map(
-                            (l) => PopupMenuItem<String>(
-                                value: l,
-                                child: Text(l),
-                                onTap: () {
-                                  List<dynamic> newValues = List.from(widget.values)..add(l);
-                                  providerArtifact.setValue(widget.fieldId, newValues);
-                                }),
-                          )
-                          .toList();
-                    },
-                  )
-          ],
+          ),
         ),
+        IconButton(
+          icon: const Icon(Icons.add),
+          onPressed: () async {
+            String? newValue = await dialogString(context, 'Add tag', 'Tag value', (v) => v.isNotEmpty);
+            if (newValue == null) return;
+            List<dynamic> newValues = List.from(widget.values)..add(newValue);
+            providerArtifact.setValue(widget.fieldId, newValues);
+          },
+        ),
+        lookup.isEmpty
+            ? Container()
+            : PopupMenuButton<String>(
+                icon: const Icon(Icons.arrow_drop_down),
+                padding: const EdgeInsets.all(0),
+                itemBuilder: (BuildContext context) {
+                  return List.from(
+                    lookup.map(
+                      (l) => PopupMenuItem<String>(
+                        value: l,
+                        child: Text(l),
+                        onTap: () {
+                          List<dynamic> newValues = List.from(widget.values)..add(l);
+                          providerArtifact.setValue(widget.fieldId, newValues);
+                        },
+                      ),
+                    ),
+                  );
+                },
+              ),
       ],
     );
   }

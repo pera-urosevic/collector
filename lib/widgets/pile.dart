@@ -6,7 +6,6 @@ import 'package:hoard/widgets/artifact.dart';
 import 'package:hoard/widgets/pile/pile_bottom_bar.dart';
 import 'package:hoard/providers/artifact_provider.dart';
 import 'package:hoard/widgets/pile/pile_card.dart';
-import 'package:hoard/widgets/prompt.dart';
 import 'package:provider/provider.dart';
 import 'package:hoard/widgets/pile/pile_editor.dart';
 import 'package:hoard/providers/pile_provider.dart';
@@ -96,16 +95,13 @@ class _PileState extends State<Pile> {
           floatingActionButton: FloatingActionButton(
             child: const Icon(Icons.add),
             onPressed: () async {
-              String newArtifactId = await Navigator.push(
+              String? newArtifactId = await dialogString(
                 context,
-                MaterialPageRoute(
-                  builder: (context) => Prompt(
-                    title: 'Create new artifact',
-                    hint: 'Artifact ID',
-                    valid: (value) => value.isNotEmpty,
-                  ),
-                ),
+                'Create a new artifact',
+                'Title',
+                (value) => value.isNotEmpty,
               );
+              if (newArtifactId == null) return;
               providerArtifact.create(newArtifactId, providerPile);
               if (!mounted) return;
               Navigator.push(

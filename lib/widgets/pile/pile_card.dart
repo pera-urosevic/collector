@@ -44,32 +44,32 @@ class PileCard extends StatelessWidget {
                   0: IntrinsicColumnWidth(),
                   1: FlexColumnWidth(1),
                 },
-                children: subtitleFields
-                    .map(
-                      (field) => TableRow(
-                        children: [
-                          TableCell(
-                            child: Padding(
-                              padding: const EdgeInsets.fromLTRB(0, 2, 8, 2),
-                              child: Text(
-                                titleCase(field.id),
-                                style: TextStyle(color: Colors.grey.shade500),
-                              ),
+                children: List.from(
+                  subtitleFields.map(
+                    (field) => TableRow(
+                      children: [
+                        TableCell(
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(0, 2, 8, 2),
+                            child: Text(
+                              titleCase(field.id),
+                              style: TextStyle(color: Colors.grey.shade500),
                             ),
                           ),
-                          TableCell(
-                            child: Padding(
-                              padding: const EdgeInsets.fromLTRB(0, 2, 0, 2),
-                              child: Text(
-                                formatIndex(field.type, providerPile.artifacts[index][field.id]),
-                                style: TextStyle(color: Colors.grey.shade500),
-                              ),
+                        ),
+                        TableCell(
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(0, 2, 0, 2),
+                            child: Text(
+                              formatIndex(field.type, providerPile.artifacts[index][field.id]),
+                              style: TextStyle(color: Colors.grey.shade500),
                             ),
                           ),
-                        ],
-                      ),
-                    )
-                    .toList(),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               )
             : null,
         onTap: () {

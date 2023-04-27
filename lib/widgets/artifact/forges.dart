@@ -80,13 +80,15 @@ class _ForgesState extends State<Forges> {
     return PopupMenuButton(
       tooltip: 'Importers',
       icon: const Icon(Icons.cloud_download),
-      itemBuilder: (context) => providerPile.forges
-          .map((forge) => PopupMenuItem(
-                value: forge,
-                child: Text(forge.id),
-                onTap: () => onForge(forge),
-              ))
-          .toList(),
+      itemBuilder: (context) => List.from(
+        providerPile.forges.map(
+          (forge) => PopupMenuItem(
+            value: forge,
+            child: Text(forge.id),
+            onTap: () => onForge(forge),
+          ),
+        ),
+      ),
     );
   }
 }

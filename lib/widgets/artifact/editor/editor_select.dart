@@ -52,17 +52,18 @@ class _EditorSelectState extends State<EditorSelect> {
           padding: const EdgeInsets.all(0),
           itemBuilder: (BuildContext context) {
             if (widget.lookup == null) return const [];
-            return widget.lookup!
-                .map(
-                  (l) => PopupMenuItem<String>(
-                      value: l,
-                      child: Text(l),
-                      onTap: () {
-                        _controller.text = l;
-                        providerArtifact.setValue(widget.fieldId, l);
-                      }),
-                )
-                .toList();
+            return List.from(
+              widget.lookup!.map(
+                (l) => PopupMenuItem<String>(
+                  value: l,
+                  child: Text(l),
+                  onTap: () {
+                    _controller.text = l;
+                    providerArtifact.setValue(widget.fieldId, l);
+                  },
+                ),
+              ),
+            );
           },
         )
       ],
