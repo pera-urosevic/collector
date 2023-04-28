@@ -13,10 +13,10 @@ import 'package:hoard/services/json_service.dart';
 import 'package:hoard/providers/pile_provider.dart';
 
 const List<String> sections = [
-  'fields',
-  'filters',
-  'forges',
   'template',
+  'filters',
+  'fields',
+  'forges',
 ];
 
 updateEditor(CodeController controller, String section, PileProvider providerPile) {
