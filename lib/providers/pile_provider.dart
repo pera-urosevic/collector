@@ -72,10 +72,10 @@ class PileProvider with ChangeNotifier {
     List<ArtifactModel> temp = _pile.artifacts;
     // filter query
     Map<String, RegExp> reQueries = {};
-    for (MapEntry entry in _pile.filter.query.entries) {
+    for (MapEntry entry in filter.query.entries) {
       reQueries[entry.key] = RegExp(entry.value, caseSensitive: false);
     }
-    if (_pile.filter.query.isNotEmpty) {
+    if (filter.query.isNotEmpty) {
       temp = temp.where((artifact) {
         for (MapEntry<String, RegExp> re in reQueries.entries) {
           if (re.value.hasMatch(artifact[re.key].toString())) return true;
@@ -94,10 +94,10 @@ class PileProvider with ChangeNotifier {
       }).toList();
     }
     // filter sort
-    String sortField = _pile.filter.sort.field;
+    String sortField = filter.sort.field;
     temp.sort((a, b) => a[sortField].compareTo(b[sortField]));
     // filter reverse
-    if (_pile.filter.sort.reverse) {
+    if (filter.sort.reverse) {
       temp = temp.reversed.toList();
     }
     _artifacts = temp;
@@ -139,10 +139,10 @@ class PileProvider with ChangeNotifier {
 
   // filter
 
-  FilterModel get filter => _pile.filter;
+  FilterModel get filter => _pile.filters.firstWhere((f) => f.id == _pile.filter, orElse: () => _pile.filters.first);
   set filter(FilterModel filter) {
     _search = '';
-    _pile.filter = filter;
+    _pile.filter = filter.id;
     _cacheArtifacts();
     notifyListeners();
     savePile();

@@ -7,7 +7,7 @@ class PileModel {
   String id;
   String template;
   List<FieldModel> fields;
-  FilterModel filter;
+  String filter;
   List<FilterModel> filters;
   List<ForgeModel> forges;
   List<Map<String, dynamic>> artifacts;
@@ -32,7 +32,7 @@ class PileModel {
         FieldModel(id: 'created', defaultValue: '', type: FieldType.datetime, index: true, search: false),
         FieldModel(id: 'modified', defaultValue: '', type: FieldType.datetime, index: true, search: false),
       ],
-      filter: FilterModel(id: 'ID', sort: SortModel(field: 'id', reverse: false), query: {}),
+      filter: 'ID',
       filters: [FilterModel(id: 'ID', sort: SortModel(field: 'id', reverse: false), query: {})],
       forges: [],
       artifacts: [],
@@ -44,7 +44,7 @@ class PileModel {
       'id': id,
       'template': template,
       'fields': fields,
-      'filter': filter.toJson(),
+      'filter': filter,
       'filters': filters.map((filter) => filter.toJson()).toList(),
       'forges': forges,
       'artifacts': artifacts,
@@ -56,7 +56,7 @@ class PileModel {
       id: json['id'],
       template: json['template'],
       fields: (json['fields'] as List<dynamic>).map((j) => FieldModel.fromJson(j)).toList(),
-      filter: FilterModel.fromJson(json['filter']),
+      filter: json['filter'],
       filters: (json['filters'] as List<dynamic>).map((j) => FilterModel.fromJson(j)).toList(),
       forges: (json['forges'] as List<dynamic>).map((j) => ForgeModel.fromJson(j)).toList(),
       artifacts: (json['artifacts'] as List<dynamic>).map((j) => j as Map<String, dynamic>).toList(),
