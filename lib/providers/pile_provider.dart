@@ -62,6 +62,7 @@ class PileProvider with ChangeNotifier {
   // cache artifacts
 
   Set<String> get artifactIds => _artifactIds;
+
   _cacheArtifactIds() {
     _artifactIds = Set.from(_pile.artifacts.map((artifact) => artifact['id']));
   }

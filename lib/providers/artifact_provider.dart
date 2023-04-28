@@ -105,6 +105,7 @@ class ArtifactProvider with ChangeNotifier {
   // storage
 
   create(String newArtifactId, PileProvider providerPile) {
+    _oldId = '';
     _oldArtifactIds = providerPile.artifactIds;
     _fields = providerPile.fields;
 
