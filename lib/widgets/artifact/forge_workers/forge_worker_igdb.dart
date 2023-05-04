@@ -77,7 +77,7 @@ class ForgeWorkerIGDB extends ForgeWorker {
       forging['id'] = result['name'];
     } catch (e) {
       // ignore: avoid_print
-      print("result['name'] ${result['name']}");
+      print("result['name'] $result");
     }
 
     // Image
@@ -85,7 +85,7 @@ class ForgeWorkerIGDB extends ForgeWorker {
       forging['image'] = 'https:${result['cover']['url'].replaceAll('t_thumb', 't_cover_big')}';
     } catch (e) {
       // ignore: avoid_print
-      print("result['cover']['url'] ${result['cover']['url']}");
+      print("result['cover']['url'] $result");
     }
 
     // Year
@@ -93,7 +93,7 @@ class ForgeWorkerIGDB extends ForgeWorker {
       forging['year'] = DateTime.fromMillisecondsSinceEpoch(result['first_release_date'] * 1000).year.toString();
     } catch (e) {
       // ignore: avoid_print
-      print("result['cover']['url'] $result['cover']['url']");
+      print("result['cover']['url'] $result");
     }
 
     // Platforms
@@ -101,7 +101,7 @@ class ForgeWorkerIGDB extends ForgeWorker {
       forging['platforms'] = result['platforms'].map((platform) => platform['name']).toList();
     } catch (e) {
       // ignore: avoid_print
-      print("result['platforms'] ${result['platforms']}");
+      print("result['platforms'] $result");
     }
 
     // Genres
@@ -109,7 +109,7 @@ class ForgeWorkerIGDB extends ForgeWorker {
       forging['genres'] = result['genres'].map((genre) => genre['name']).toList();
     } catch (e) {
       // ignore: avoid_print
-      print("result['genres'] ${result['genres']}");
+      print("result['genres'] $result");
     }
 
     // Website
@@ -117,7 +117,7 @@ class ForgeWorkerIGDB extends ForgeWorker {
       forging['website'] = result['url'];
     } catch (e) {
       // ignore: avoid_print
-      print("result['url'] ${result['url']}");
+      print("result['url'] $result");
     }
 
     // Rating
@@ -125,7 +125,7 @@ class ForgeWorkerIGDB extends ForgeWorker {
       forging['rating'] = result['aggregated_rating'].round().toString();
     } catch (e) {
       // ignore: avoid_print
-      print("result['aggregated_rating'] ${result['aggregated_rating']}");
+      print("result['aggregated_rating'] $result");
     }
 
     // Description
@@ -133,7 +133,7 @@ class ForgeWorkerIGDB extends ForgeWorker {
       forging['description'] = result['summary'];
     } catch (e) {
       // ignore: avoid_print
-      print("result['summary'] ${result['summary']}");
+      print("result['summary'] $result");
     }
 
     // Forge

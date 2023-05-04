@@ -40,7 +40,7 @@ class ForgeWorkerRAWG extends ForgeWorker {
       forging['id'] = result['name'];
     } catch (e) {
       // ignore: avoid_print
-      print("result['name'] ${result['name']}");
+      print("result['name'] $result");
     }
 
     // Image
@@ -48,7 +48,7 @@ class ForgeWorkerRAWG extends ForgeWorker {
       forging['image'] = result['background_image'];
     } catch (e) {
       // ignore: avoid_print
-      print("result['cover']['url'] ${result['cover']['url']}");
+      print("result['cover']['url'] $result");
     }
 
     // Year
@@ -56,7 +56,7 @@ class ForgeWorkerRAWG extends ForgeWorker {
       forging['year'] = DateTime.parse(result['released']).year.toString();
     } catch (e) {
       // ignore: avoid_print
-      print("result['cover']['url'] $result['cover']['url']");
+      print("result['cover']['url'] $result");
     }
 
     // Platforms
@@ -64,7 +64,7 @@ class ForgeWorkerRAWG extends ForgeWorker {
       forging['platforms'] = result['platforms'].map((platform) => platform['platform']['name']).toList();
     } catch (e) {
       // ignore: avoid_print
-      print("result['platforms'] ${result['platforms']}");
+      print("result['platforms'] $result");
     }
 
     // Genres
@@ -72,7 +72,7 @@ class ForgeWorkerRAWG extends ForgeWorker {
       forging['genres'] = result['genres'].map((genre) => genre['name']).toList();
     } catch (e) {
       // ignore: avoid_print
-      print("result['genres'] ${result['genres']}");
+      print("result['genres'] $result");
     }
 
     // Website
@@ -80,7 +80,7 @@ class ForgeWorkerRAWG extends ForgeWorker {
       forging['website'] = 'https://rawg.io/games/${result['slug']}';
     } catch (e) {
       // ignore: avoid_print
-      print("result['url'] ${result['url']}");
+      print("result['url'] $result");
     }
 
     // Rating
@@ -88,7 +88,7 @@ class ForgeWorkerRAWG extends ForgeWorker {
       forging['rating'] = result['metacritic'].toString();
     } catch (e) {
       // ignore: avoid_print
-      print("result['aggregated_rating'] ${result['aggregated_rating']}");
+      print("result['aggregated_rating'] $result");
     }
 
     // Description
@@ -96,7 +96,7 @@ class ForgeWorkerRAWG extends ForgeWorker {
       forging['description'] = result['description_raw'];
     } catch (e) {
       // ignore: avoid_print
-      print("result['summary'] ${result['summary']}");
+      print("result['summary'] $result");
     }
 
     // Forge
