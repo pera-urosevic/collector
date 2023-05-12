@@ -16,10 +16,10 @@ class ArtifactWide extends StatelessWidget {
       appBar: ArtifactAppBar(
         artifactId: providerArtifact.id,
       ),
-      body: Row(
+      body: const Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
-        children: const [
+        children: [
           Expanded(
             flex: 5,
             child: ArtifactEdit(),
