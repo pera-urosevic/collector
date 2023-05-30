@@ -34,9 +34,9 @@ class PileProvider with ChangeNotifier {
   _cacheLookups() {
     _lookups = {};
     for (FieldModel field in _pile.fields) {
+      Set<String> set = Set.from(field.data['options'] ?? {});
       switch (field.type) {
         case FieldType.select:
-          Set<String> set = {};
           for (ArtifactModel artifact in _pile.artifacts) {
             String value = artifact[field.id].toString();
             set.add(value);
@@ -45,7 +45,6 @@ class PileProvider with ChangeNotifier {
           _lookups[field.id]?.sort((a, b) => a.compareTo(b));
           break;
         case FieldType.tags:
-          Set<String> set = {};
           for (ArtifactModel artifact in _pile.artifacts) {
             List<String> values = List<String>.from(artifact[field.id].map((value) => value.toString()));
             set.addAll(values);

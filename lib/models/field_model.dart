@@ -18,6 +18,7 @@ class FieldModel {
   dynamic defaultValue;
   bool index;
   bool search;
+  dynamic data;
 
   FieldModel({
     required this.id,
@@ -25,6 +26,7 @@ class FieldModel {
     required this.defaultValue,
     required this.index,
     required this.search,
+    required this.data,
   });
 
   Map<String, dynamic> toJson() {
@@ -34,6 +36,7 @@ class FieldModel {
       'defaultValue': defaultValue,
       'index': index,
       'search': search,
+      'data': data,
     };
   }
 
@@ -44,6 +47,7 @@ class FieldModel {
       defaultValue: json['defaultValue'],
       index: json['index'],
       search: json['search'],
+      data: json['data'],
     );
   }
 }
