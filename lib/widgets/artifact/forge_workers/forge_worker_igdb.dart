@@ -13,8 +13,8 @@ final String secretIGDB = dotenv.env['IGDB_SECRET']!;
 const cacheToken = 'IGDB:Token';
 
 class ForgeWorkerIGDB extends ForgeWorker {
-  Future<String> getToken() async {
-    if (!config.has(cacheToken)) {
+  Future<String> getToken(bool retry) async {
+    if (!config.has(cacheToken) || retry) {
       Uri uri = Uri.parse('https://id.twitch.tv/oauth2/token?client_id=$idIGDB&client_secret=$secretIGDB&grant_type=client_credentials');
       Response response = await post(uri);
       Map json = jsonDecode(utf8.decode(response.bodyBytes));
@@ -23,9 +23,9 @@ class ForgeWorkerIGDB extends ForgeWorker {
     return config.get(cacheToken);
   }
 
-  Future<dynamic> api({required String url, required String body}) async {
+  Future<dynamic> api({required String url, required String body, retry = false}) async {
     try {
-      final String token = await getToken();
+      final String token = await getToken(retry);
       Response response = await post(
         Uri.parse(url),
         headers: {
@@ -34,6 +34,12 @@ class ForgeWorkerIGDB extends ForgeWorker {
         },
         body: body,
       );
+      if (response.statusCode != 200) {
+        if (retry) {
+          throw Exception('IGDB Error: ${response.statusCode}');
+        }
+        return api(url: url, body: body, retry: true);
+      }
       return jsonDecode(utf8.decode(response.bodyBytes));
     } catch (error) {
       // ignore: avoid_print
