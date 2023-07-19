@@ -21,11 +21,11 @@ class ArtifactWide extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Expanded(
-            flex: 5,
+            flex: 1,
             child: ArtifactEdit(),
           ),
           Expanded(
-            flex: 4,
+            flex: 1,
             child: ArtifactView(),
           ),
         ],
