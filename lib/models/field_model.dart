@@ -1,4 +1,5 @@
 enum FieldType {
+  uid,
   id,
   boolean,
   date,

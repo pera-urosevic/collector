@@ -1,4 +1,4 @@
-package cloud.dreamsleep.hoard.hoard
+package org.somnusalis.collector
 
 import io.flutter.embedding.android.FlutterActivity
 

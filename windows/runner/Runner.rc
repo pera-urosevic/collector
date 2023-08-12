@@ -89,13 +89,13 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "cloud.dreamsleep.hoard" "\0"
-            VALUE "FileDescription", "hoard" "\0"
+            VALUE "CompanyName", "org.somnusalis.collector" "\0"
+            VALUE "FileDescription", "collector" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "hoard" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2023 cloud.dreamsleep.hoard. All rights reserved." "\0"
-            VALUE "OriginalFilename", "hoard.exe" "\0"
-            VALUE "ProductName", "hoard" "\0"
+            VALUE "InternalName", "collector" "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2023 org.somnusalis.collector. All rights reserved." "\0"
+            VALUE "OriginalFilename", "collector.exe" "\0"
+            VALUE "ProductName", "collector" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

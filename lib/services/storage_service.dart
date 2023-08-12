@@ -2,8 +2,8 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:image/image.dart';
 import 'package:path/path.dart';
-import 'package:hoard/models/pile_model.dart';
-import 'package:hoard/services/json_service.dart';
+import 'package:collector/models/collection_model.dart';
+import 'package:collector/services/json_service.dart';
 import 'package:http/http.dart';
 import 'package:uuid/uuid.dart';
 
@@ -16,45 +16,45 @@ class Storage {
 
   Storage() {
     if (Platform.isAndroid) {
-      _directory = Directory('/storage/emulated/0/Hoard');
+      _directory = Directory('/storage/emulated/0/Collector');
       return;
     }
     if (Platform.isWindows) {
-      _directory = Directory('${Platform.environment['USERPROFILE']}\\Hoard');
+      _directory = Directory('${Platform.environment['USERPROFILE']}\\Data\\Collector');
       return;
     }
   }
 
   Future<List<String>> list() async {
-    List<String> pileIds = [];
+    List<String> collectionIds = [];
     await for (FileSystemEntity entity in _directory.list(recursive: false)) {
       if (extension(entity.path) != '.json') continue;
       String name = basenameWithoutExtension(entity.path);
-      pileIds.add(name);
+      collectionIds.add(name);
     }
-    pileIds.sort();
-    return pileIds;
+    collectionIds.sort();
+    return collectionIds;
   }
 
-  Future<void> save(PileModel pile) async {
-    String filePath = '${_directory.path}${Platform.pathSeparator}${pile.id}.json';
-    String contents = encode(pile);
+  Future<void> save(CollectionModel collection) async {
+    String filePath = '${_directory.path}${Platform.pathSeparator}${collection.id}.json';
+    String contents = encode(collection);
     File(filePath).writeAsString(contents);
   }
 
-  Future<PileModel> load(String pileId) async {
-    String filePath = '${_directory.path}${Platform.pathSeparator}$pileId.json';
+  Future<CollectionModel> load(String collectionId) async {
+    String filePath = '${_directory.path}${Platform.pathSeparator}$collectionId.json';
     String contents = await File(filePath).readAsString();
-    PileModel pile = PileModel.fromJson(decode(contents));
-    return pile;
+    CollectionModel collection = CollectionModel.fromJson(decode(contents));
+    return collection;
   }
 
-  Future<void> remove(String pileId) async {
-    String filePath = '${_directory.path}${Platform.pathSeparator}$pileId.json';
+  Future<void> remove(String collectionId) async {
+    String filePath = '${_directory.path}${Platform.pathSeparator}$collectionId.json';
     File(filePath).delete();
   }
 
-  Future<String> addImage(String pileId, String url) async {
+  Future<String> addImage(String collectionId, String fieldId, String itemUid, String url) async {
     var response = await get(Uri.parse(url));
     Image? image = decodeImage(response.bodyBytes);
     if (image == null) return '';
@@ -63,9 +63,9 @@ class Storage {
     } else {
       image = copyResize(image, width: 320);
     }
-    String key = uuid.v4();
-    String imageField = '$pileId:$key.jpg';
-    String imagePath = [pileId, '$key.jpg'].join(Platform.pathSeparator);
+    String key = '$fieldId-$itemUid';
+    String imageField = '$collectionId:$key.jpg';
+    String imagePath = [collectionId, '$key.jpg'].join(Platform.pathSeparator);
     String filePath = [directory.path, imagePath].join(Platform.pathSeparator);
     File file = File(filePath);
     file.createSync(recursive: true);

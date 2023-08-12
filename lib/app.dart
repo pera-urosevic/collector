@@ -1,11 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:hoard/providers/artifact_provider.dart';
-import 'package:hoard/widgets/artifact.dart';
-import 'package:hoard/widgets/hoard.dart';
-import 'package:hoard/providers/pile_provider.dart';
-import 'package:hoard/theme.dart';
-import 'package:hoard/widgets/pile.dart';
+import 'package:collector/providers/item_provider.dart';
+import 'package:collector/widgets/item.dart';
+import 'package:collector/widgets/collector.dart';
+import 'package:collector/providers/collection_provider.dart';
+import 'package:collector/theme.dart';
+import 'package:collector/widgets/collection.dart';
 import 'package:provider/provider.dart';
 
 class App extends StatefulWidget {
@@ -16,20 +16,20 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
-  late Widget home = const Hoard();
+  late Widget home = const Collector();
 
   initDebug() async {
     return;
     // ignore: dead_code
     String initialPage = 'Test';
-    PileProvider providerPile = context.read<PileProvider>();
-    await providerPile.loadPile(initialPage);
-    setState(() => home = const Pile());
+    CollectionProvider providerCollection = context.read<CollectionProvider>();
+    await providerCollection.loadCollection(initialPage);
+    setState(() => home = const Collection());
 
     if (!mounted) return;
-    ArtifactProvider providerArtifact = context.read<ArtifactProvider>();
-    providerArtifact.load(providerPile, providerPile.artifacts[1]);
-    setState(() => home = const Artifact());
+    ItemProvider providerItem = context.read<ItemProvider>();
+    providerItem.load(providerCollection, providerCollection.items[1]);
+    setState(() => home = const Item());
   }
 
   @override
@@ -41,7 +41,7 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Hoard',
+      title: 'Collector',
       theme: themeData,
       home: home,
       debugShowCheckedModeBanner: false,

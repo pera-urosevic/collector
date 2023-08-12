@@ -1,4 +1,4 @@
-import 'package:hoard/models/sort_model.dart';
+import 'package:collector/models/sort_model.dart';
 
 class FilterModel {
   String id;
