@@ -7,15 +7,29 @@ import 'package:collector/config.dart';
 import 'package:collector/providers/item_provider.dart';
 import 'package:collector/providers/collector_provider.dart';
 import 'package:collector/providers/collection_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import 'package:window_manager/window_manager.dart';
+
+checkPermission() async {
+  if (await Permission.manageExternalStorage.isDenied) {
+    if (await Permission.manageExternalStorage.isPermanentlyDenied) {
+      openAppSettings();
+      return;
+    }
+    await Permission.manageExternalStorage.request();
+  }
+}
 
 void main() async {
   await dotenv.load();
   await cacheInit();
 
+  WidgetsFlutterBinding.ensureInitialized();
+  if (Platform.isAndroid) {
+    await checkPermission();
+  }
   if (Platform.isWindows) {
-    WidgetsFlutterBinding.ensureInitialized();
     await windowManager.ensureInitialized();
     WindowOptions windowOptions = const WindowOptions(
       size: Size(1024, 1104),
