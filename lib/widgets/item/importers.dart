@@ -40,7 +40,7 @@ class _ImportersState extends State<Importers> {
     onImporter(ImporterModel importerModel) async {
       ImporterWorker importerWorker = spawnImporterWorker(importerModel.id);
       List<String> fields = importerModel.fields;
-      List results = await importerWorker.search(providerItem.uid);
+      List results = await importerWorker.search(providerItem.id);
       if (!mounted) return;
       showModalBottomSheet(
         context: context,
